@@ -70,7 +70,7 @@ int extent_server::getattr(extent_protocol::extentid_t id, extent_protocol::attr
 
 int extent_server::remove(extent_protocol::extentid_t id, int &)
 {
-  printf("extent_server: write %lld\n", id);
+  printf("extent_server: remove %lld\n", id);
 
   id &= 0x7fffffff;
   im->remove_file(id);
@@ -78,3 +78,31 @@ int extent_server::remove(extent_protocol::extentid_t id, int &)
   return extent_protocol::OK;
 }
 
+int extent_server::read_dir(extent_protocol::extentid_t id, std::vector<std::pair<extent_protocol::extentid_t, std::string>> &bufs)
+{
+  printf("extent_server: read dir %lld\n", id);
+  im->read_dir(id, bufs);
+  printf("extent_server: have found dir %ld\n", bufs.size());
+  return extent_protocol::OK;
+}
+
+int extent_server::add_to_dir(extent_protocol::extentid_t parent_id, extent_protocol::extentid_t id, std::string name)
+{
+  printf("extent_server: add %lld to %lld\n", id, parent_id);
+  im->add_to_dir(parent_id, id, name);
+  return extent_protocol::OK;
+}
+
+int extent_server::remove_from_dir(extent_protocol::extentid_t parent_id, extent_protocol::extentid_t id)
+{
+  printf("extent_server: remove %lld from %lld\n", id, parent_id);
+  im->remove_from_dir(parent_id, id);
+  return extent_protocol::OK;
+}
+
+int extent_server::set_attr(extent_protocol::extentid_t id, size_t size)
+{
+  printf("extent_server: set %lld attr size to %ld\n", id, size);
+  im->set_attr(id, size);
+  return extent_protocol::OK;
+}

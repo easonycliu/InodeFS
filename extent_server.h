@@ -5,6 +5,7 @@
 
 #include <string>
 #include <map>
+#include <list>
 #include "extent_protocol.h"
 #include "inode_manager.h"
 
@@ -27,6 +28,10 @@ class extent_server {
   int get(extent_protocol::extentid_t id, std::string &);
   int getattr(extent_protocol::extentid_t id, extent_protocol::attr &);
   int remove(extent_protocol::extentid_t id, int &);
+  int read_dir(extent_protocol::extentid_t id, std::vector<std::pair<extent_protocol::extentid_t, std::string>> &bufs);
+  int add_to_dir(extent_protocol::extentid_t parent_id, extent_protocol::extentid_t id, std::string name);
+  int remove_from_dir(extent_protocol::extentid_t parent_id, extent_protocol::extentid_t id);
+  int set_attr(extent_protocol::extentid_t id, size_t size);
 };
 
 #endif 

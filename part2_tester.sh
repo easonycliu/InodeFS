@@ -112,7 +112,7 @@ test_if_has_mount
 
 ##################################################################################
 
-./test-lab1-part2-e.sh chfs1 | grep -q "Passed BLOB"
+./test-lab1-part2-e.sh chfs1 | grep "Passed BLOB"
 if [ $? -ne 0 ];
 then
         echo "Failed test-e"

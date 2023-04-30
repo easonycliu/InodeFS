@@ -35,6 +35,8 @@ for(my $iters = 0; $iters < 100; $iters++){
 }
 
 dircheck();
+cleanup();
+dircheck();
 printf "Passed all tests!\n";
 exit(0);
 
@@ -146,4 +148,9 @@ sub deleteone {
     delete $files->{$k};
     push(@dead, $k);
     return 1;
+}
+
+sub cleanup {
+    while(deleteone()){
+    }
 }

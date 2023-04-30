@@ -16,7 +16,7 @@ ifeq ($(shell uname -s),Darwin)
 else
   MACFLAGS=
 endif
-LDFLAGS = -L. -L/usr/local/lib
+LDFLAGS = -L. -L/usr/local/lib -g
 LDLIBS = -lpthread 
 ifeq ($(LAB1GE),1)
   ifeq ($(shell uname -s),Darwin)

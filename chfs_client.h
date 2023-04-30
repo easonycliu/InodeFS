@@ -53,6 +53,7 @@ class chfs_client {
   int read(inum, size_t, off_t, std::string &);
   int unlink(inum,const char *);
   int mkdir(inum , const char *, mode_t , inum &);
+  int ln(inum, const char *, mode_t, inum &);
   
   /** you may need to add symbolic link related methods here.*/
 };

@@ -12,24 +12,21 @@ extent_client::extent_client()
   es = new extent_server();
 }
 
-extent_protocol::status
-extent_client::create(uint32_t type, extent_protocol::extentid_t &id)
+extent_protocol::status extent_client::create(uint32_t type, extent_protocol::extentid_t &id)
 {
   extent_protocol::status ret = extent_protocol::OK;
   ret = es->create(type, id);
   return ret;
 }
 
-extent_protocol::status
-extent_client::get(extent_protocol::extentid_t eid, std::string &buf)
+extent_protocol::status extent_client::get(extent_protocol::extentid_t eid, std::string &buf)
 {
   extent_protocol::status ret = extent_protocol::OK;
   ret = es->get(eid, buf);
   return ret;
 }
 
-extent_protocol::status
-extent_client::getattr(extent_protocol::extentid_t eid, 
+extent_protocol::status extent_client::getattr(extent_protocol::extentid_t eid, 
 		       extent_protocol::attr &attr)
 {
   extent_protocol::status ret = extent_protocol::OK;
@@ -37,8 +34,7 @@ extent_client::getattr(extent_protocol::extentid_t eid,
   return ret;
 }
 
-extent_protocol::status
-extent_client::put(extent_protocol::extentid_t eid, std::string buf)
+extent_protocol::status extent_client::put(extent_protocol::extentid_t eid, std::string buf)
 {
   extent_protocol::status ret = extent_protocol::OK;
   int r;
@@ -46,8 +42,7 @@ extent_client::put(extent_protocol::extentid_t eid, std::string buf)
   return ret;
 }
 
-extent_protocol::status
-extent_client::remove(extent_protocol::extentid_t eid)
+extent_protocol::status extent_client::remove(extent_protocol::extentid_t eid)
 {
   extent_protocol::status ret = extent_protocol::OK;
   int r;
@@ -55,4 +50,22 @@ extent_client::remove(extent_protocol::extentid_t eid)
   return ret;
 }
 
+extent_protocol::status extent_client::read_dir(extent_protocol::extentid_t eid, std::vector<std::pair<extent_protocol::extentid_t, std::string>> &bufs)
+{
+  return es->read_dir(eid, bufs);
+}
 
+extent_protocol::status extent_client::add_to_dir(extent_protocol::extentid_t parent_id, extent_protocol::extentid_t eid, std::string name)
+{
+  return es->add_to_dir(parent_id, eid, name);
+}
+
+extent_protocol::status extent_client::remove_from_dir(extent_protocol::extentid_t parent_id, extent_protocol::extentid_t id)
+{
+  return es->remove_from_dir(parent_id, id);
+}
+
+extent_protocol::status extent_client::set_attr(extent_protocol::extentid_t eid, size_t size)
+{
+  return es->set_attr(eid, size);
+}
